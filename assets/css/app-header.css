@@ -1,0 +1,25 @@
+.app-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: rgb(63, 63, 245);
+}
+.nav-bar >*:not(:last-child){
+    margin-right: 1rem;
+}
+.nav-bar >*{
+    text-decoration: none;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    
+}
+.nav-bar >*:hover{
+    color: rgb(119, 109, 109);
+}
+.logo{
+    font-size: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+}
