@@ -4,7 +4,7 @@ export function AppHeader() {
     return (
         <header className="app-header full main-layout nav-bar">
                 <Link className="logo" to="/">
-                    Mister Book
+                    Mister Book By Amir Greenberg
                 </Link>
             <nav className="nav-bar">
                 <NavLink to="/">Home</NavLink>

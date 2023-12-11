@@ -55,8 +55,8 @@ setTimeout(() => eventBusService.emit('some-event', 100), 3000)
 
 
 
-window.showSuccessMsg = showSuccessMsg
-window.showErrorMsg = showErrorMsg
+// window.showSuccessMsg = showSuccessMsg
+// window.showErrorMsg = showErrorMsg
 
 
 

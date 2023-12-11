@@ -5,6 +5,7 @@ import { BookList } from '../cmps/BookList.jsx'
 import { BookDetails } from './BookDetails.jsx'
 import { BookFilter } from '../cmps/BookFilter.jsx'
 import { BookEdit } from './BookEdit.jsx'
+import { showSuccessMsg } from '../services/event-bus.service.js'
 
 export function BookIndex() {
     const [books, setBooks] = useState(null)
@@ -17,10 +18,9 @@ export function BookIndex() {
     }, [filterBy])
 
     function loadBooks() {
-        bookService.query(filterBy)
-            .then((books) => {
-                setBooks(books)
-            })
+        bookService.query(filterBy).then((books) => {
+            setBooks(books)
+        })
     }
 
     function onSelectBook(bookId) {
@@ -30,19 +30,25 @@ export function BookIndex() {
     }
 
     function onUpdateBook(bookToSave) {
-        bookService.save(bookToSave)
-            .then((savedBook) => {
-                setSelectedBook(bookToSave)
-                setIsEdit(false)
-                setBooks(prevBooks => prevBooks.map((b) => b.id === savedBook.id ? savedBook : b))
-            })
+        bookService.save(bookToSave).then((savedBook) => {
+            setSelectedBook(bookToSave)
+            setIsEdit(false)
+            setBooks((prevBooks) =>
+                prevBooks.map((b) => (b.id === savedBook.id ? savedBook : b))
+            )
+        })
     }
 
     function onRemoveBook(bookId) {
-        bookService.remove(bookId)
+        bookService
+            .remove(bookId)
             .then(() => {
-                setBooks(prevBooks => prevBooks.filter((b) => b.id !== bookId))
+                setBooks((prevBooks) => {
+                    return prevBooks.filter((book) => book.id !== bookId)
+                })
+                showSuccessMsg(`Book successfully removed! ${bookId}`)
             })
+            .catch((err) => console.log('err:', err))
     }
 
     function onSetFilter(filterBy) {
@@ -56,7 +62,13 @@ export function BookIndex() {
             {!selectedBook && (
                 <React.Fragment>
                     <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                    {books.length && <BookList books={books} onSelectBook={onSelectBook} onRemoveBook={onRemoveBook} />}
+                    {books.length && (
+                        <BookList
+                            books={books}
+                            onSelectBook={onSelectBook}
+                            onRemoveBook={onRemoveBook}
+                        />
+                    )}
                     {!books.length && <div> No Books found...</div>}
                 </React.Fragment>
             )}
