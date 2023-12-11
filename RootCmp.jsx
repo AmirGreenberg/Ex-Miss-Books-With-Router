@@ -5,7 +5,7 @@ const { Routes, Route, Navigate } = ReactRouterDOM
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { Team } from './cmps/Team.jsx'
 import { UserMsg } from './cmps/UserMsg.jsx'
-import { Vision } from './cmps/vision.jsx'
+import { Vision } from './cmps/Vision.jsx'
 import { About } from './pages/About.jsx'
 import { BookDetails } from './pages/BookDetails.jsx'
 import { BookEdit } from './pages/BookEdit.jsx'
